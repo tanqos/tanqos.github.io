@@ -1,289 +1,638 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rony Halder · Hardware Designer</title>
-
-  <!-- Font Awesome -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio · PCB & Products</title>
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- Google Fonts: clean modern type -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+    rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  <!-- Google Fonts: Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    body {
+      background: #f5f7fc;
+      font-family: 'Inter', sans-serif;
+      color: #1e1e2f;
+      line-height: 1.5;
+      padding: 2rem 1.5rem;
+    }
 
-  <!-- Your stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ---- header / hero ---- */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3.5rem;
+      background: linear-gradient(145deg, #ffffff 0%, #f0f4ff 100%);
+      padding: 2.5rem 2.8rem;
+      border-radius: 3rem;
+      box-shadow: 0 20px 40px -12px rgba(0, 20, 50, 0.15);
+      transition: all 0.2s;
+    }
+
+    .hero-text h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #0b1a3a, #2a4b7c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.1;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #2c3e5c;
+      margin-top: 0.4rem;
+      max-width: 450px;
+      opacity: 0.8;
+    }
+
+    .hero-badge {
+      display: flex;
+      gap: 1.5rem;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(6px);
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+    }
+
+    .hero-badge span {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      color: #1f3a5f;
+    }
+
+    .hero-badge i {
+      font-size: 1.6rem;
+      color: #2a6b9e;
+    }
+
+    /* ---- section titles ---- */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: #13273f;
+    }
+
+    .section-title i {
+      color: #2a6b9e;
+      font-size: 1.8rem;
+      opacity: 0.9;
+    }
+
+    .divider {
+      height: 3px;
+      width: 60px;
+      background: linear-gradient(90deg, #2a6b9e, #9ab5d9);
+      border-radius: 4px;
+      margin: 0.2rem 0 2rem 0;
+    }
+
+    /* ---- cards grid (PCB & products) ---- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 2rem;
+      overflow: hidden;
+      box-shadow: 0 12px 30px -8px rgba(0, 20, 40, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(220, 230, 245, 0.4);
+      backdrop-filter: blur(2px);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 48px -16px rgba(18, 52, 106, 0.18);
+      border-color: #cdddec;
+    }
+
+    .card-img {
+      background: #e7edf8;
+      padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+      border-bottom: 2px solid #f0f5fe;
+    }
+
+    .card-img img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: transform 0.2s;
+    }
+
+    .card:hover .card-img img {
+      transform: scale(1.01);
+    }
+
+    /* SVG fallback / placeholder style (if no real image) */
+    .pcb-placeholder,
+    .product-placeholder {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #1f3a5f;
+      font-weight: 500;
+    }
+
+    .pcb-placeholder i,
+    .product-placeholder i {
+      font-size: 3.8rem;
+      opacity: 0.5;
+      margin-bottom: 0.3rem;
+      color: #2a5f8a;
+    }
+
+    .card-body {
+      padding: 1.6rem 1.6rem 1.8rem;
+      flex: 1;
+    }
+
+    .card-body h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #0f263f;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-body .tag {
+      display: inline-block;
+      background: #e4edf9;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.3rem 1rem;
+      color: #1f4a78;
+      margin-bottom: 0.9rem;
+    }
+
+    .card-body p {
+      color: #2d405b;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: flex-start;
+      gap: 1rem;
+      margin-top: 0.2rem;
+      border-top: 1px solid #eef3fa;
+      padding-top: 1rem;
+    }
+
+    .card-footer a {
+      color: #1e4b78;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+
+    .card-footer a i {
+      font-size: 0.9rem;
+    }
+
+    .card-footer a:hover {
+      color: #0c2b4a;
+      text-decoration: underline;
+    }
+
+    /* ---- extra: showreel / about ---- */
+    .showcase {
+      background: #ffffffd9;
+      backdrop-filter: blur(4px);
+      border-radius: 2.8rem;
+      padding: 2.5rem 2.8rem;
+      margin-top: 2.5rem;
+      border: 1px solid #e9eff9;
+      box-shadow: 0 12px 28px -10px rgba(0, 30, 60, 0.06);
+    }
+
+    .showcase-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem 3rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .showcase-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .showcase-item i {
+      font-size: 2.6rem;
+      color: #1e4b78;
+      background: #eaf1fc;
+      padding: 0.6rem;
+      border-radius: 18px;
+    }
+
+    .showcase-item span {
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: #1e314a;
+    }
+
+    .showcase-item small {
+      display: block;
+      font-weight: 400;
+      color: #4b6589;
+      font-size: 0.9rem;
+    }
+
+    /* footer / contact */
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 2px solid #dbe3ef;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: #1f3d63;
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a i {
+      font-size: 1.2rem;
+    }
+
+    .footer-links a:hover {
+      color: #0b1f36;
+    }
+
+    .footer-copy {
+      color: #4d6a8f;
+      font-size: 0.95rem;
+    }
+
+    /* responsive */
+    @media (max-width: 720px) {
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.8rem;
+        padding: 2rem 1.8rem;
+      }
+
+      /* Profile picture */
+      .profile-pic-wrap {
+        flex-shrink: 0;
+      }
+
+      .profile-pic {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #ffffff;
+        box-shadow: 0 12px 28px -8px rgba(30, 70, 130, 0.35),
+          0 0 0 3px #e0ebfa;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .profile-pic:hover {
+        transform: scale(1.05);
+        box-shadow: 0 16px 34px -8px rgba(30, 70, 130, 0.45),
+          0 0 0 3px #c9dcf5;
+      }
+
+      .profile-pic-fallback {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #e0ebfa, #cdddec);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #2a6b9e;
+        font-size: 3.5rem;
+        border: 4px solid #ffffff;
+        box-shadow: 0 12px 28px -8px rgba(30, 70, 130, 0.35),
+          0 0 0 3px #e0ebfa;
+      }
+
+      /* Mobile tweaks */
+      @media (max-width: 720px) {
+
+        .profile-pic,
+        .profile-pic-fallback {
+          width: 100px;
+          height: 100px;
+          font-size: 2.8rem;
+        }
+
+        .hero>div:first-child {
+          gap: 1.2rem !important;
+        }
+      }
+
+      .hero-text h1 {
+        font-size: 2.6rem;
+      }
+
+      .hero-badge {
+        flex-wrap: wrap;
+        padding: 0.8rem 1.5rem;
+        gap: 0.8rem 1.8rem;
+      }
+
+      .showcase-grid {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="container">
+  <div class="container">
 
-  <!-- ================= HERO ================= -->
-  <header class="hero">
-    <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+    <!-- HERO -->
+    <header class="hero">
+      <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
 
-      <!-- Profile Picture -->
-      <div class="profile-pic-wrap">
-        <img src="images/profile.jpg"
-             alt="Rony Halder"
-             class="profile-pic"
-             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'profile-pic-fallback\'><i class=\'fas fa-user\'></i></div>'">
-      </div>
-
-      <div class="hero-text">
-        <h1>Rony Halder</h1>
-        <p>Hardware · PCB Design · Firmware Development</p>
-
-        <div style="margin-top: 1rem; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
-          <span style="background: #dde6f5; padding: 0.3rem 1.2rem; border-radius: 30px; font-weight: 500; font-size: 0.85rem;">⚡ 8+ years</span>
-          <span style="background: #dde6f5; padding: 0.3rem 1.2rem; border-radius: 30px; font-weight: 500; font-size: 0.85rem;">🔬 20+ boards</span>
+        <!-- Profile Picture -->
+        <div class="profile-pic-wrap">
+          <img src="images/profile.jpg" alt="Rony Halder" class="profile-pic"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'profile-pic-fallback\'><i class=\'fas fa-user\'></i></div>'">
         </div>
 
-        <div style="margin-top: 1.2rem;">
-          <a href="files/Rony-Halder-CV.pdf" download class="cv-btn">
-            <i class="fas fa-download"></i> Download CV
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-badge">
-      <span><i class="fas fa-microchip"></i> PCB</span>
-      <span><i class="fas fa-cube"></i> Products</span>
-      <span><i class="fab fa-github"></i> GitHub</span>
-    </div>
-  </header>
-
-  <!-- ================= ABOUT ME ================= -->
-  <section class="about">
-    <div class="about-inner">
-      <div class="about-text">
-        <div class="section-title" style="margin-bottom: 1rem;">
-          <i class="fas fa-user-astronaut"></i> About Me
-        </div>
-        <div class="divider" style="margin-bottom: 1.5rem;"></div>
-
-        <p>
-          I'm a hardware engineer with <strong>8+ years</strong> of experience designing
-          PCBs and embedded firmware for products that actually ship. My work spans
-          consumer electronics, industrial IoT, and RF systems — from the first
-          schematic to a fully assembled, tested device.
-        </p>
-        <p style="margin-top: 1rem;">
-          I've taken <strong>20+ boards</strong> from concept to production, led hardware
-          and mechanical teams, and love the messy, satisfying middle ground between
-          a datasheet and a working prototype. When I'm not routing traces, I'm
-          writing firmware, tuning antennas, or mentoring junior engineers.
-        </p>
-
-        <div class="about-tags">
-          <span class="about-tag"><i class="fas fa-bolt"></i> KiCad / Altium</span>
-          <span class="about-tag"><i class="fas fa-microchip"></i> STM32 / ESP32</span>
-          <span class="about-tag"><i class="fas fa-code"></i> C / C++ / Python</span>
-          <span class="about-tag"><i class="fas fa-wave-square"></i> RF & Antennas</span>
-          <span class="about-tag"><i class="fas fa-drafting-compass"></i> SolidWorks</span>
-          <span class="about-tag"><i class="fas fa-cogs"></i> DFM / DFA</span>
-        </div>
-      </div>
-
-      <div class="about-stats">
-        <div class="stat-card">
-          <div class="stat-num">8+</div>
-          <div class="stat-label">Years experience</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">20+</div>
-          <div class="stat-label">PCBs designed</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">12</div>
-          <div class="stat-label">Products shipped</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">3</div>
-          <div class="stat-label">Design awards</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= PCB SECTION ================= -->
-  <div>
-    <div class="section-title">
-      <i class="fas fa-bolt"></i> PCB designs
-      <span style="font-weight: 400; font-size: 1rem; color: #3e6188; margin-left: 0.5rem;">— 8 projects</span>
-    </div>
-    <div class="divider"></div>
-
-    <div class="grid">
-
-      <!-- PCB 1 -->
-      <div class="card">
-        <div class="card-img">
-          <img src="images/pcb-nucleo.jpg" alt="STM32 Nucleo breakout PCB"
-               onerror="this.parentElement.innerHTML='<div class=\'pcb-placeholder\'><i class=\'fas fa-microchip\'></i><span>STM32 · 4-layer</span></div>'">
-        </div>
-        <div class="card-body">
-          <span class="tag"><i class="far fa-file-alt"></i> PCB</span>
-          <h3>Nucleo-64 Breakout</h3>
-          <p>High-speed USB-C, SWD, and 2x I2C. Compact 50x60mm, 4-layer with controlled impedance.</p>
-          <div class="card-footer">
-            <a href="files/nucleo-schematic.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Schematic</a>
-            <a href="files/nucleo-gerber.zip"><i class="fas fa-download"></i> Gerber</a>
-            <a href="https://github.com/tanqos" target="_blank"><i class="fab fa-github"></i> Code</a>
+        <div class="hero-text">
+          <h1>Rony Halder</h1>
+          <p>Hardware · PCB Design · Firmware Development</p>
+          <div style="margin-top: 1rem; display: flex; gap: 0.6rem; flex-wrap: wrap;">
+            <span
+              style="background: #dde6f5; padding: 0.3rem 1.2rem; border-radius: 30px; font-weight: 500; font-size: 0.85rem;">⚡
+              8+ years</span>
+            <span
+              style="background: #dde6f5; padding: 0.3rem 1.2rem; border-radius: 30px; font-weight: 500; font-size: 0.85rem;">🔬
+              20+ boards</span>
           </div>
         </div>
       </div>
 
-      <!-- PCB 2 -->
-      <div class="card">
-        <div class="card-img">
-          <img src="images/pcb-esp32.jpg" alt="ESP32 IoT sensor node PCB"
-               onerror="this.parentElement.innerHTML='<div class=\'pcb-placeholder\'><i class=\'fas fa-plug\'></i><span>ESP32 · HDI</span></div>'">
-        </div>
-        <div class="card-body">
-          <span class="tag"><i class="far fa-file-alt"></i> PCB</span>
-          <h3>IoT Sensor Node</h3>
-          <p>ESP32-S3 with BME280, accelerometer, and LoRa. Designed for low-power, battery-ready.</p>
-          <div class="card-footer">
-            <a href="files/iot-sensor-sch.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Schematic</a>
-            <a href="images/pcb-esp32-3d.jpg" target="_blank"><i class="fas fa-cube"></i> 3D View</a>
-            <a href="https://github.com/tanqos" target="_blank"><i class="fab fa-github"></i> Code</a>
+      <div class="hero-badge">
+        <span><i class="fas fa-microchip"></i> PCB</span>
+        <span><i class="fas fa-cube"></i> Products</span>
+        <span><i class="fab fa-github"></i> GitHub</span>
+      </div>
+    </header>
+
+    <!-- PCB SECTION -->
+    <div>
+      <div class="section-title">
+        <i class="fas fa-bolt"></i> PCB designs
+        <span style="font-weight: 400; font-size: 1rem; color: #3e6188; margin-left: 0.5rem;">— 8 projects</span>
+      </div>
+      <div class="divider"></div>
+      <div class="grid">
+
+        <!-- card 1 PCB -->
+        <div class="card">
+          <div class="card-img">
+            <div class="pcb-placeholder">
+              <i class="fas fa-microchip"></i>
+              <span style="font-size:0.8rem; opacity:0.7;">STM32 · 4-layer</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <span class="tag"><i class="far fa-file-alt"></i> PCB</span>
+            <h3>Nucleo-64 breakout</h3>
+            <p>High-speed USB-C, SWD, and 2x I2C. Compact 50x60mm, 4-layer with controlled impedance.</p>
+            <div class="card-footer">
+              <a href="#"><i class="fab fa-github"></i> View design</a>
+              <a href="#"><i class="fas fa-eye"></i> 3D preview</a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- PCB 3 -->
-      <div class="card">
-        <div class="card-img">
-          <img src="images/pcb-rf.jpg" alt="Sub-GHz RF transceiver PCB"
-               onerror="this.parentElement.innerHTML='<div class=\'pcb-placeholder\'><i class=\'fas fa-wave-square\'></i><span>RF · 6-layer</span></div>'">
-        </div>
-        <div class="card-body">
-          <span class="tag"><i class="far fa-file-alt"></i> PCB</span>
-          <h3>Sub-GHz Transceiver</h3>
-          <p>CC1312 based, SMA antenna, with integrated balun. Verified up to +14dBm.</p>
-          <div class="card-footer">
-            <a href="files/rf-transceiver.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Report</a>
-            <a href="files/rf-gerber.zip"><i class="fas fa-download"></i> Gerber</a>
-            <a href="https://github.com/tanqos" target="_blank"><i class="fab fa-github"></i> Code</a>
+        <!-- card 2 PCB -->
+        <div class="card">
+          <div class="card-img">
+            <div class="pcb-placeholder">
+              <i class="fas fa-plug"></i>
+              <span style="font-size:0.8rem; opacity:0.7;">ESP32 · HDI</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <span class="tag"><i class="far fa-file-alt"></i> PCB</span>
+            <h3>IoT sensor node</h3>
+            <p>ESP32-S3 with BME280, accelerometer, and LoRa. Designed for low-power, battery-ready.</p>
+            <div class="card-footer">
+              <a href="#"><i class="fab fa-github"></i> Schematics</a>
+              <a href="#"><i class="fas fa-camera"></i> photo</a>
+            </div>
           </div>
         </div>
-      </div>
 
+        <!-- card 3 PCB -->
+        <div class="card">
+          <div class="card-img">
+            <div class="pcb-placeholder">
+              <i class="fas fa-wave-square"></i>
+              <span style="font-size:0.8rem; opacity:0.7;">RF · 6-layer</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <span class="tag"><i class="far fa-file-alt"></i> PCB</span>
+            <h3>Sub-GHz transceiver</h3>
+            <p>CC1312 based, SMA antenna, with integrated balun. Verified up to +14dBm.</p>
+            <div class="card-footer">
+              <a href="#"><i class="fab fa-github"></i> Gerber</a>
+              <a href="#"><i class="fas fa-chart-line"></i> test report</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+
+    <!-- FINAL PRODUCTS SECTION -->
+    <div style="margin-top: 1.2rem;">
+      <div class="section-title">
+        <i class="fas fa-cube"></i> Final products
+        <span style="font-weight: 400; font-size: 1rem; color: #3e6188; margin-left: 0.5rem;">— 6 devices</span>
+      </div>
+      <div class="divider"></div>
+      <div class="grid">
+
+        <!-- product 1 -->
+        <div class="card">
+          <div class="card-img">
+            <div class="product-placeholder">
+              <i class="fas fa-robot"></i>
+              <span style="font-size:0.8rem; opacity:0.7;">fully assembled</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <span class="tag"><i class="fas fa-check-circle"></i> product</span>
+            <h3>Auto-Feed Pet Feeder</h3>
+            <p>Wi-Fi connected, load-cell sensor, and motorized dispenser. Production-ready enclosure.</p>
+            <div class="card-footer">
+              <a href="#"><i class="fas fa-external-link-alt"></i> case study</a>
+              <a href="#"><i class="fab fa-youtube"></i> demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- product 2 -->
+        <div class="card">
+          <div class="card-img">
+            <div class="product-placeholder">
+              <i class="fas fa-headphones"></i>
+              <span style="font-size:0.8rem; opacity:0.7;">consumer audio</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <span class="tag"><i class="fas fa-check-circle"></i> product</span>
+            <h3>Studio Monitor Amp</h3>
+            <p>Class-D 2x50W, integrated DSP, balanced inputs. Aluminum chassis + custom PCB.</p>
+            <div class="card-footer">
+              <a href="#"><i class="fas fa-image"></i> gallery</a>
+              <a href="#"><i class="fas fa-file-pdf"></i> datasheet</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- product 3 -->
+        <div class="card">
+          <div class="card-img">
+            <div class="product-placeholder">
+              <i class="fas fa-tint"></i>
+              <span style="font-size:0.8rem; opacity:0.7;">environmental</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <span class="tag"><i class="fas fa-check-circle"></i> product</span>
+            <h3>HydroSense V2</h3>
+            <p>Water quality monitor: pH, ORP, temperature. Submersible IP68 housing.</p>
+            <div class="card-footer">
+              <a href="#"><i class="fab fa-github"></i> firmware</a>
+              <a href="#"><i class="fas fa-video"></i> field test</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHOWCASE / extra (CV highlights) -->
+    <div class="showcase">
+      <div class="showcase-grid">
+        <div class="showcase-item">
+          <i class="fas fa-pcb"></i>
+          <div><span>20+ PCBs</span><small>from prototype to production</small></div>
+        </div>
+        <div class="showcase-item">
+          <i class="fas fa-box-open"></i>
+          <div><span>12 final products</span><small>consumer, industrial, IoT</small></div>
+        </div>
+        <div class="showcase-item">
+          <i class="fas fa-trophy"></i>
+          <div><span>3 design awards</span><small>2023 · 2024</small></div>
+        </div>
+        <div class="showcase-item">
+          <i class="fas fa-users-cog"></i>
+          <div><span>team lead</span><small>hardware + mechanical</small></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER / CONTACT (CV ready) -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="#"><i class="fab fa-github"></i> github.com/alexhw</a>
+        <a href="#"><i class="fab fa-linkedin-in"></i> linkedin</a>
+        <a href="#"><i class="fas fa-envelope"></i> alex@hardware.io</a>
+      </div>
+      <div class="footer-copy">
+        <i class="far fa-copyright"></i> 2026 · portfolio built for CV
+      </div>
+    </footer>
+
   </div>
-
-  <!-- ================= FINAL PRODUCTS SECTION ================= -->
-  <div style="margin-top: 1.2rem;">
-    <div class="section-title">
-      <i class="fas fa-cube"></i> Final products
-      <span style="font-weight: 400; font-size: 1rem; color: #3e6188; margin-left: 0.5rem;">— 6 devices</span>
-    </div>
-    <div class="divider"></div>
-
-    <div class="grid">
-
-      <!-- Product 1 -->
-      <div class="card">
-        <div class="card-img">
-          <img src="images/product-petfeeder.jpg" alt="Auto-feed pet feeder product"
-               onerror="this.parentElement.innerHTML='<div class=\'product-placeholder\'><i class=\'fas fa-robot\'></i><span>fully assembled</span></div>'">
-        </div>
-        <div class="card-body">
-          <span class="tag"><i class="fas fa-check-circle"></i> product</span>
-          <h3>Auto-Feed Pet Feeder</h3>
-          <p>Wi-Fi connected, load-cell sensor, and motorized dispenser. Production-ready enclosure.</p>
-          <div class="card-footer">
-            <a href="files/petfeeder-casestudy.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Case Study</a>
-            <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i> Demo</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 2 -->
-      <div class="card">
-        <div class="card-img">
-          <img src="images/product-amp.jpg" alt="Studio monitor amplifier product"
-               onerror="this.parentElement.innerHTML='<div class=\'product-placeholder\'><i class=\'fas fa-headphones\'></i><span>consumer audio</span></div>'">
-        </div>
-        <div class="card-body">
-          <span class="tag"><i class="fas fa-check-circle"></i> product</span>
-          <h3>Studio Monitor Amp</h3>
-          <p>Class-D 2x50W, integrated DSP, balanced inputs. Aluminum chassis + custom PCB.</p>
-          <div class="card-footer">
-            <a href="images/product-amp-gallery.jpg" target="_blank"><i class="fas fa-image"></i> Gallery</a>
-            <a href="files/amp-datasheet.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Datasheet</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 3 -->
-      <div class="card">
-        <div class="card-img">
-          <img src="images/product-hydrosense.jpg" alt="HydroSense water quality monitor"
-               onerror="this.parentElement.innerHTML='<div class=\'product-placeholder\'><i class=\'fas fa-tint\'></i><span>environmental</span></div>'">
-        </div>
-        <div class="card-body">
-          <span class="tag"><i class="fas fa-check-circle"></i> product</span>
-          <h3>HydroSense V2</h3>
-          <p>Water quality monitor: pH, ORP, temperature. Submersible IP68 housing.</p>
-          <div class="card-footer">
-            <a href="https://github.com/tanqos" target="_blank"><i class="fab fa-github"></i> Firmware</a>
-            <a href="https://youtube.com" target="_blank"><i class="fas fa-video"></i> Field Test</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ================= SHOWCASE ================= -->
-  <div class="showcase">
-    <div class="showcase-grid">
-      <div class="showcase-item">
-        <i class="fas fa-microchip"></i>
-        <div><span>20+ PCBs</span><small>prototype to production</small></div>
-      </div>
-      <div class="showcase-item">
-        <i class="fas fa-box-open"></i>
-        <div><span>12 final products</span><small>consumer · industrial · IoT</small></div>
-      </div>
-      <div class="showcase-item">
-        <i class="fas fa-trophy"></i>
-        <div><span>3 design awards</span><small>2023 · 2024</small></div>
-      </div>
-      <div class="showcase-item">
-        <i class="fas fa-users-cog"></i>
-        <div><span>Team lead</span><small>hardware + mechanical</small></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-    <div class="footer-profile">
-      <img src="images/profile.jpg"
-           alt="Rony Halder"
-           class="footer-avatar"
-           onerror="this.style.display='none';">
-      <div>
-        <div class="footer-name">Rony Halder</div>
-        <div class="footer-role">Hardware · PCB · Firmware</div>
-      </div>
-    </div>
-
-    <div class="footer-links">
-      <a href="https://github.com/tanqos" target="_blank"><i class="fab fa-github"></i> github.com/tanqos</a>
-      <a href="https://linkedin.com/in/ronyhalder" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
-      <a href="mailto:rony@example.com"><i class="fas fa-envelope"></i> Email</a>
-      <a href="files/Rony-Halder-CV.pdf" download><i class="fas fa-file-pdf"></i> CV</a>
-    </div>
-
-    <div class="footer-copy">
-      <i class="far fa-copyright"></i> 2026 · Rony Halder
-    </div>
-  </footer>
-
-</div>
+  <!-- container end -->
 </body>
+
 </html>
